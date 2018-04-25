@@ -1,0 +1,19 @@
+﻿@model MyContactPage.Models.Fever
+@{
+    ViewBag.Title = "FeverCheck";
+}
+
+<h2>FeverCheck</h2>
+
+<form method="post">
+
+    <input type="number" name="temperature" value="@Model.Temperature" />
+
+    <input type="submit" value="Celcius" />
+
+</form>
+
+@if (!Model.messege.IsEmpty())
+{
+    <h2>@Model.messege</h2>
+}
