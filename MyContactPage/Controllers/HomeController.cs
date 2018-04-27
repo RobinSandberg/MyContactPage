@@ -45,5 +45,23 @@ namespace MyContactPage.Controllers
             Fever.FeverControl(check);
             return View(check);
         }
+
+        [HttpGet]
+        public ActionResult GuessGame()
+        {
+      
+            Session["Random"] = GuessingGame.RandomNumber();
+            return View(GuessingGame.Guesses);
+        }
+
+        [HttpPost]
+        public ActionResult GuessGame(int GuessNum, GuessingGame temp)
+        {
+            
+            temp.GuessNum = GuessNum;
+            GuessingGame.NumberCheck(temp);
+            GuessingGame.Guesses.Add(temp);
+            return View(GuessingGame.Guesses);
+        }
     }
 }
