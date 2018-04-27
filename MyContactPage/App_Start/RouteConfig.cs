@@ -15,7 +15,7 @@ namespace MyContactPage
 
             routes.MapRoute(
                 name: "Fever",
-                url: "FeverRoute",
+                url: "FeverCheck",
                 defaults: new { controller = "Home", action = "FeverCheck", id = UrlParameter.Optional }
             );
 
