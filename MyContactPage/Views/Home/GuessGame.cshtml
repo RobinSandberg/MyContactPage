@@ -1,4 +1,4 @@
-﻿@model List<MyContactPage.Models.GuessingGame>
+﻿
 @{
     ViewBag.Title = "GuessGame";
 }
@@ -7,27 +7,36 @@
 
 <p>Guess a Number between 1 and 100</p>
 
-<form method="post">
-
-    <input type="number" name="GuessNum" value="" />
-
-    <input type="submit" value="Guess" />
-
-</form>
-
-
-
-<ol>
-    @foreach (MyContactPage.Models.GuessingGame item in Model)
-    {
-        <li id="@item.GuessCount">@item.GuessNum</li>
-        @item.msg
-        
-    }
-</ol>
-
 @if (Session["Random"] != null)
 {
-    <h4> Random number </h4>
-    <p>@Session["Random"]</p>
+    try
+    {
+        <form method="post">
+
+            <input type="number" name="GuessNum" value="" placeholder="Input a number" />
+
+            <input type="submit" value="Guess" />
+        </form>
+    }
+    catch (Exception)
+    {
+        <p>No number was added</p>
+    }
 }
+
+
+@if (Session["Guesses"] != null)
+{
+    <h2>Guess History</h2>
+    <p>@Session["msg"]</p>
+    <ol>
+        @foreach (var item in (List<int>)Session["Guesses"])
+        {
+            <li>@(item)</li>
+        }
+    </ol>
+
+}
+
+
+

@@ -51,17 +51,47 @@ namespace MyContactPage.Controllers
         {
       
             Session["Random"] = GuessingGame.RandomNumber();
-            return View(GuessingGame.Guesses);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult GuessGame(int GuessNum, GuessingGame temp)
+        public ActionResult GuessGame(int GuessNum = 0)
         {
+            List<int> Guesses = new List<int>();
+            string msg = "";
+           
+            if (Session["Guesses"] != null)
+            {
+                Guesses = (List<int>)Session["Guesses"];
+            }
+            Session["Guesses"] = Guesses;
+            Guesses.Add(GuessNum);
             
-            temp.GuessNum = GuessNum;
-            GuessingGame.NumberCheck(temp);
-            GuessingGame.Guesses.Add(temp);
-            return View(GuessingGame.Guesses);
+            if (Session["Random"] != null)
+            {
+                if (GuessNum <= 0 || GuessNum >= 101)
+                {
+                    msg = "You not guessing within the limit range";
+                    Guesses.Remove(Guesses.Last());
+                }
+                else if (GuessNum == Convert.ToInt32(Session["Random"]))
+                {
+                    msg = "You guessed Correct with " + Guesses.Count + " guesses. New number drawn." ;
+                    Session["Random"] = GuessingGame.RandomNumber();
+                    Guesses.Clear();
+                }
+                else if (GuessNum < Convert.ToInt32(Session["Random"]))
+                {
+                    msg = "You guessed to low. You guessed " + Guesses.Count + " times so far.";
+                }
+                else if (GuessNum > Convert.ToInt32(Session["Random"]))
+                {
+                    msg = "You guessed to high. You guessed " + Guesses.Count + " times so far.";
+                }
+                
+            } 
+            Session["msg"] = msg; 
+            return View();
         }
     }
 }
