@@ -58,7 +58,10 @@ namespace MyContactPage.Controllers
         public ActionResult GuessGame(int GuessNum = 0)
         {
             List<int> Guesses = new List<int>();
+            List<string> OldGuesses = new List<string>();
+
             string msg = "";
+            string oldmsg = "";
            
             if (Session["Guesses"] != null)
             {
@@ -66,6 +69,11 @@ namespace MyContactPage.Controllers
             }
             Session["Guesses"] = Guesses;
             Guesses.Add(GuessNum);
+            if (Session["oldGuesses"] != null)
+            {
+                OldGuesses = (List<string>)Session["oldGuesses"];
+            }
+            Session["oldGuesses"] = OldGuesses;
             
             if (Session["Random"] != null)
             {
@@ -77,6 +85,8 @@ namespace MyContactPage.Controllers
                 else if (GuessNum == Convert.ToInt32(Session["Random"]))
                 {
                     msg = "You guessed Correct with " + Guesses.Count + " guesses. New number drawn." ;
+                    oldmsg = "The number was " + Session["Random"] + ". It took you " + Guesses.Count + " to guess right.";
+                    OldGuesses.Add(oldmsg);
                     Session["Random"] = GuessingGame.RandomNumber();
                     Guesses.Clear();
                 }

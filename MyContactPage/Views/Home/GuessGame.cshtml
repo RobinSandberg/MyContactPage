@@ -9,26 +9,19 @@
 
 @if (Session["Random"] != null)
 {
-    try
-    {
-        <form method="post">
+    <form method="post">
 
-            <input type="number" name="GuessNum" value="" placeholder="Input a number" />
+        <input type="number" name="GuessNum" value="" placeholder="Input a number" />
 
-            <input type="submit" value="Guess" />
-        </form>
-    }
-    catch (Exception)
-    {
-        <p>No number was added</p>
-    }
+        <input type="submit" value="Guess" />
+    </form>
 }
 @if (Session["msg"] != null)
 {
     <h3>@Session["msg"]</h3>
 }
 
-<h4>Guess History</h4>
+<h4>Guessed Numbers</h4>
 @if (Session["Guesses"] != null)
 {
     <ol>
@@ -37,7 +30,16 @@
             <li>@(item)</li>
         }
     </ol>
-
+}
+<h4>Guess History</h4>
+@if (Session["oldGuesses"] != null)
+{
+    <ol>
+        @foreach (var item in (List<string>)Session["oldGuesses"])
+        {
+            <li>@(item)</li>
+        }
+    </ol>
 }
 
 
