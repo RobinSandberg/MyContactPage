@@ -20,8 +20,11 @@ namespace MyContactPage.Models
 
         public static void FeverControl(Fever fever)
         {
-
-            if (fever.Temperature >= Fever.fever)
+            if(fever.Temperature == 0)
+            {
+                fever.messege = "Type in a Number";   
+            }
+            else if (fever.Temperature >= Fever.fever)
             {
                 fever.messege = "You got a fever";
             }

@@ -23,12 +23,14 @@
         <p>No number was added</p>
     }
 }
+@if (Session["msg"] != null)
+{
+    <h3>@Session["msg"]</h3>
+}
 
-
+<h4>Guess History</h4>
 @if (Session["Guesses"] != null)
 {
-    <h2>Guess History</h2>
-    <p>@Session["msg"]</p>
     <ol>
         @foreach (var item in (List<int>)Session["Guesses"])
         {

@@ -38,7 +38,7 @@ namespace MyContactPage.Controllers
         }
 
         [HttpPost]
-        public ActionResult FeverCheck(float temperature)
+        public ActionResult FeverCheck(float temperature = 0)
         {
             Fever check = new Fever();
             check.Temperature = temperature;
@@ -71,7 +71,7 @@ namespace MyContactPage.Controllers
             {
                 if (GuessNum <= 0 || GuessNum >= 101)
                 {
-                    msg = "You not guessing within the limit range";
+                    msg = "You not guessing within the limit range!";
                     Guesses.Remove(Guesses.Last());
                 }
                 else if (GuessNum == Convert.ToInt32(Session["Random"]))
