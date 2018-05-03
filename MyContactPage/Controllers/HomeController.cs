@@ -85,7 +85,7 @@ namespace MyContactPage.Controllers
                 else if (GuessNum == Convert.ToInt32(Session["Random"]))
                 {
                     msg = "You guessed Correct with " + Guesses.Count + " guesses. New number drawn." ;
-                    oldmsg = "The number was " + Session["Random"] + ". It took you " + Guesses.Count + " to guess right.";
+                    oldmsg = "The number was " + Session["Random"] + ". It took you " + Guesses.Count + " attempts to guess right.";
                     OldGuesses.Add(oldmsg);
                     Session["Random"] = GuessingGame.RandomNumber();
                     Guesses.Clear();
