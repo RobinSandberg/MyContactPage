@@ -92,11 +92,11 @@ namespace MyContactPage.Controllers
                 }
                 else if (GuessNum < Convert.ToInt32(Session["Random"]))
                 {
-                    msg = "You guessed to low. You guessed " + Guesses.Count + " times so far.";
+                    msg = "You guessed to low. You have guessed " + Guesses.Count + " times so far.";
                 }
                 else if (GuessNum > Convert.ToInt32(Session["Random"]))
                 {
-                    msg = "You guessed to high. You guessed " + Guesses.Count + " times so far.";
+                    msg = "You guessed to high. You have guessed " + Guesses.Count + " times so far.";
                 }
                 
             } 
